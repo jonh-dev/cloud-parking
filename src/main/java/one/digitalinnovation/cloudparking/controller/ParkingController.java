@@ -38,6 +38,7 @@ public class ParkingController {
     }
 
     @GetMapping("/{id}")
+    @ApiOperation("Find by Id Parkings")
     public ResponseEntity<ParkingDTO> findById(@PathVariable String id){
 
         Parking parking = parkingService.findById(id);
@@ -46,12 +47,14 @@ public class ParkingController {
     }
 
     @DeleteMapping("/{id}")
+    @ApiOperation("Delete Parkings")
     public ResponseEntity delete(@PathVariable String id){
         parkingService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping
+    @ApiOperation("Create Parkings")
     public ResponseEntity<ParkingDTO> create(@RequestBody ParkingCreateDTO dto){
         Parking parkingCreate = parkingMapper.toParkingCreate(dto);
         Parking parking = parkingService.create(parkingCreate);
@@ -60,6 +63,7 @@ public class ParkingController {
     }
 
     @PutMapping("/{id}")
+    @ApiOperation("Update Parkings")
     public ResponseEntity<ParkingDTO> update(@PathVariable String id, @RequestBody ParkingCreateDTO parkingCreateDTO){
         Parking parkingUpdate = parkingMapper.toParkingCreate(parkingCreateDTO);
         Parking parking = parkingService.update(id, parkingUpdate);
@@ -67,6 +71,7 @@ public class ParkingController {
     }
 
     @PostMapping("/{id}")
+    @ApiOperation("Exit Parkings")
     public ResponseEntity<ParkingDTO> exit(@PathVariable String id){
         Parking parking = parkingService.exit(id);
         return ResponseEntity.ok(parkingMapper.toParkingDTO(parking));
